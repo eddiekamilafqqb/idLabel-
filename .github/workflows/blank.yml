@@ -1,0 +1,44 @@
+#include <GUIConstantsEx.au3>
+#include <MsgBoxConstants.au3>
+#include "GuiFlatButton.au3"
+
+Example()
+
+;GUI with one button
+Func Example()
+
+    Local $hGUI, $mybutton1
+
+    $hGUI = GUICreate("GuiFlatButton Ex0", 275, 120)
+    GUISetBkColor(0x333333)
+
+    $idLabel = GUICtrlCreateLabel("Click the button", 10, 100, 150, 30)
+    GUICtrlSetColor(-1, 0xFFFFFF)
+
+    ;create new button then set the background and foreground colors
+    $mybutton1 = GuiFlatButton_Create("Button 1", 78, 20, 120, 40)
+    GuiFlatButton_SetBkColor(-1, 0x5555FF)
+    GuiFlatButton_SetColor(-1, 0xFFFFFF)
+
+    GUISetState(@SW_SHOW, $hGUI)
+
+    Local $i = 0
+    Local $iMsg
+    While 1
+        $iMsg = GUIGetMsg()
+
+        Switch $iMsg
+            Case $GUI_EVENT_CLOSE
+                ExitLoop
+
+            Case $mybutton1
+                $i += 1
+                GUICtrlSetData($idLabel, $i)
+                ConsoleWrite($i & @CRLF)
+        EndSwitch
+
+        Sleep(10)
+    WEnd
+
+    GUIDelete()
+EndFunc   ;==>Example
